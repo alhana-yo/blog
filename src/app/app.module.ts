@@ -1,13 +1,35 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { PostsModule } from "./posts/posts.module";
+import { AppLayoutComponent } from "./layout/app-layout/app-layout.component";
+import { LayoutModule } from "./layout/layout.module";
 import { BlogEntriesService } from "./services/blog-entries.service";
 
+const ROUTES: Routes = [
+  {
+    path: "",
+    component: AppLayoutComponent,
+    children: [
+      {
+        path: "posts",
+        loadChildren: () =>
+          import("./posts/posts.module").then(m => m.PostsModule)
+      }
+    ]
+  },
+
+  { path: "**", redirectTo: "posts" }
+];
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, PostsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(ROUTES),
+    HttpClientModule,
+    LayoutModule
+  ],
   providers: [BlogEntriesService],
   bootstrap: [AppComponent]
 })

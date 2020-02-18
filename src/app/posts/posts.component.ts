@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { BlogEntry } from "../models/blog-entries.models";
-import { BlogEntriesService } from "../services/blog-entries.service";
+import { BlogEntriesNormalizerService } from "../services/blog-entries-normalizer.service";
 
 @Component({
   selector: "app-posts",
@@ -10,7 +10,7 @@ import { BlogEntriesService } from "../services/blog-entries.service";
 })
 export class PostsComponent implements OnInit {
   public posts$: Observable<BlogEntry[]>;
-  constructor(private _blogEntriesService: BlogEntriesService) {}
+  constructor(private _blogEntriesService: BlogEntriesNormalizerService) {}
 
   ngOnInit(): void {
     this.posts$ = this._blogEntriesService.getPosts();

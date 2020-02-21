@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
+import { AuthModule } from "./auth/auth.module";
 import { LoginComponent } from "./auth/login/login.component";
 import { AppLayoutComponent } from "./layout/app-layout/app-layout.component";
 import { LayoutModule } from "./layout/layout.module";
@@ -40,7 +41,8 @@ const ROUTES: Routes = [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     HttpClientModule,
-    LayoutModule
+    LayoutModule,
+    AuthModule
   ],
   providers: [BlogEntriesService],
   bootstrap: [AppComponent]

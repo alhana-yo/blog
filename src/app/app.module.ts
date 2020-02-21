@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
+import { LoginComponent } from "./auth/login/login.component";
 import { AppLayoutComponent } from "./layout/app-layout/app-layout.component";
 import { LayoutModule } from "./layout/layout.module";
 import { SimpleComponent } from "./layout/simple/simple.component";
@@ -22,13 +23,13 @@ const ROUTES: Routes = [
   },
   {
     path: "login",
-    component: SimpleComponent
-    // children: [
-    //   {
-    //     path: '',
-    //     component: LoginComponent
-    //   }
-    // ]
+    component: SimpleComponent,
+    children: [
+      {
+        path: "",
+        component: LoginComponent
+      }
+    ]
   },
 
   { path: "**", redirectTo: "posts" }

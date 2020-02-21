@@ -5,6 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { AppLayoutComponent } from "./layout/app-layout/app-layout.component";
 import { LayoutModule } from "./layout/layout.module";
+import { SimpleComponent } from "./layout/simple/simple.component";
 import { BlogEntriesService } from "./services/blog-entries.service";
 
 const ROUTES: Routes = [
@@ -18,6 +19,16 @@ const ROUTES: Routes = [
           import("./posts/posts.module").then(m => m.PostsModule)
       }
     ]
+  },
+  {
+    path: "login",
+    component: SimpleComponent
+    // children: [
+    //   {
+    //     path: '',
+    //     component: LoginComponent
+    //   }
+    // ]
   },
 
   { path: "**", redirectTo: "posts" }

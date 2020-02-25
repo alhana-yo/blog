@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/internal/operators';
 import { Token } from 'src/app/models/token.model';
 import { LoginService } from '../../services/login.service';
 import { FormValidator } from '../../validators/form-validator';
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
     // Aqui recuperamos cada campo username y password, que es lo que necesito para llamar al servicio
     const username = this.form.get('username').value;
     const password = this.form.get('password').value;
+    console.log('usuario ' + username + 'y contraseña ' + password);
     const auth = this.transformToBase64(username, password);
     console.log('datos codificados', auth);
     // this.loginService.login(username, password).subscribe(
@@ -41,12 +44,15 @@ export class LoginComponent implements OnInit {
     //   (token: Token) => sessionStorage.setItem("token", token.token)
     // );
 
-    this.loginService.login(auth).subscribe(
+    this.loginService.login(auth).pipe(catchError(val => of(val))).subscribe(
       // guardamos el token en el session storage
-      (token: Token) => sessionStorage.setItem('token', token.token)
+      (token: Token) => {
+        console.log('tokeeeeen', token);
+        sessionStorage.setItem('token', token.token);
+      }
     );
   }
-  transformToBase64(username, password) {
+  private transformToBase64(username, password) {
     const dataTob64 = username + ':' + password;
     return btoa(dataTob64);
   }

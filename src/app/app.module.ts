@@ -1,39 +1,40 @@
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { RouterModule, Routes } from "@angular/router";
-import { AppComponent } from "./app.component";
-import { AuthModule } from "./auth/auth.module";
-import { LoginComponent } from "./auth/login/login.component";
-import { AppLayoutComponent } from "./layout/app-layout/app-layout.component";
-import { LayoutModule } from "./layout/layout.module";
-import { SimpleComponent } from "./layout/simple/simple.component";
-import { BlogEntriesService } from "./services/blog-entries.service";
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
+import { LoginComponent } from './auth/login/login.component';
+import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
+import { LayoutModule } from './layout/layout.module';
+import { SimpleComponent } from './layout/simple/simple.component';
+import { BlogEntriesService } from './services/blog-entries.service';
+import { LoginService } from './services/login.service';
 
 const ROUTES: Routes = [
   {
-    path: "",
+    path: '',
     component: AppLayoutComponent,
     children: [
       {
-        path: "posts",
+        path: 'posts',
         loadChildren: () =>
-          import("./posts/posts.module").then(m => m.PostsModule)
+          import('./posts/posts.module').then(m => m.PostsModule)
       }
     ]
   },
   {
-    path: "login",
+    path: 'login',
     component: SimpleComponent,
     children: [
       {
-        path: "",
+        path: '',
         component: LoginComponent
       }
     ]
   },
 
-  { path: "**", redirectTo: "posts" }
+  { path: '**', redirectTo: 'posts' }
 ];
 @NgModule({
   declarations: [AppComponent],
@@ -44,7 +45,7 @@ const ROUTES: Routes = [
     LayoutModule,
     AuthModule
   ],
-  providers: [BlogEntriesService],
+  providers: [BlogEntriesService, LoginService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

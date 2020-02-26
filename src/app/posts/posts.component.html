@@ -2,10 +2,19 @@
 <!-- En el trackby le digo cual es el id de cada item, y solo me renderizara el item que esté cambiando -->
 <dl>
   <ng-container *ngFor="let post of posts$ | async">
-    <dt>Nombre:</dt>
-    <dd>{{ post.name }}</dd>
+    <fieldset>
+      <dt>Nombre:</dt>
+      <dd>{{ post.name }}</dd>
+      <dt>Nickname:</dt>
+      <dd>{{ post.nickname }}</dd>
+    </fieldset>
+
   </ng-container>
 </dl>
+
+<button>Add New Post</button>
+<button>Update Post</button>
+<button>Delete Post</button>
 
 <!--
 "name": "Tris",

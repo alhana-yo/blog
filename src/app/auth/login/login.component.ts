@@ -45,10 +45,14 @@ export class LoginComponent implements OnInit {
     // );
 
     this.loginService.login(auth).pipe(catchError(val => of(val))).subscribe(
-      // guardamos el token en el session storage
-      (token: Token) => {
-        console.log('tokeeeeen', token);
-        sessionStorage.setItem('token', token.token);
+      // guardamos el token y el rol en el session storage
+      (loggedUserInfo: Token) => {
+        console.log('tokeeeeen', loggedUserInfo);
+        console.log('rol', loggedUserInfo.role);
+        sessionStorage.setItem('token', loggedUserInfo.token);
+        sessionStorage.setItem('role', loggedUserInfo.role);
+
+        // sessionStorage.setItem('user-info', JSON.stringify(loggedUserInfo));
       }
     );
   }

@@ -1,10 +1,15 @@
 <p>post-form works!</p>
 <form [formGroup]="postForm">
-  Username: <input type="text" formControlName="username" />
-  Password: <input type="password" formControlName="password" />
-  <fieldset formGroupName="address">
-    city: <input type="text" formControlName="city" />
-    postcode: <input type="text" formControlName="postcode" />
+
+  <fieldset formGroupName="personalInfo">
+    Username: <input type="text" formControlName="name" />
+    Surname: <input type="text" formControlName="lastName" />
   </fieldset>
-  <button (click)="onSave()">Send</button>
+  Nickname: <input type="text" formControlName="nickname" />
+
+  <fieldset formGroupName="postInfo">
+    Post Title: <input type="text" formControlName="postTitle" />
+    Post Text: <input type="text" formControlName="postText" />
+  </fieldset>
+  <button [disabled]="!postForm.valid" (click)="onSave()">Send</button>
 </form>

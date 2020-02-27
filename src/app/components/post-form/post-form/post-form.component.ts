@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-post-form',
@@ -12,11 +12,14 @@ export class PostFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.postForm = new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl(''),
-      address: new FormGroup({
-        city: new FormControl(''),
-        postcode: new FormControl('')
+      personalInfo: new FormGroup({
+        name: new FormControl('', [Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+      }),
+      nickname: new FormControl('', [Validators.required]),
+      postInfo: new FormGroup({
+        postTitle: new FormControl('', [Validators.required]),
+        postText: new FormControl('', [Validators.required]),
       })
     });
 
@@ -24,10 +27,13 @@ export class PostFormComponent implements OnInit {
 
   onSave() {
     console.log(this.postForm.value);
-    // Aqui recuperamos cada campo username y password, que es lo que necesito para llamar al servicio
-    const username = this.postForm.get('username').value;
-    const password = this.postForm.get('password').value;
+    // Aqui recuperamos la información de los campos que necesitamos
+    const username = this.postForm.get('personalInfo.name').value;
+    const password = this.postForm.get('nickname').value;
     console.log('nombre ' + username + ', otro ' + password);
+
+    // REcuperamos toda la info que necesitamos mandar en la petición, y mandamos esa info
+    // al servicio que normaliza la info para que el servidor la pueda consumir
 
   }
 }

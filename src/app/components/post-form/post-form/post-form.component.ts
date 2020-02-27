@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NewPostNormalizerService } from 'src/app/services/new-post-normalizer.service';
 
 @Component({
   selector: 'app-post-form',
@@ -8,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class PostFormComponent implements OnInit {
   postForm: FormGroup;
-  constructor() { }
+  constructor(private _newPostService: NewPostNormalizerService) { }
 
   ngOnInit(): void {
     this.postForm = new FormGroup({
@@ -26,14 +27,18 @@ export class PostFormComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.postForm.value);
-    // Aqui recuperamos la información de los campos que necesitamos
-    const username = this.postForm.get('personalInfo.name').value;
-    const password = this.postForm.get('nickname').value;
-    console.log('nombre ' + username + ', otro ' + password);
-
+    console.log('lo que recogemos del formulario', this.postForm.value);
     // REcuperamos toda la info que necesitamos mandar en la petición, y mandamos esa info
     // al servicio que normaliza la info para que el servidor la pueda consumir
+    const postInfo = {
+      name: this.postForm.get('personalInfo.name').value,
+      lastName: this.postForm.get('personalInfo.lastName').value,
+      nickname: this.postForm.get('nickname').value,
+      postTitle: this.postForm.get('postInfo.postTitle').value,
+      postText: this.postForm.get('postInfo.postText').value
 
+    };
+    console.log('info que mandamos', postInfo);
+    this._newPostService.savePost(postInfo);
   }
 }

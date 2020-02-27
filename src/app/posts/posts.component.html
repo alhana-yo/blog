@@ -8,17 +8,19 @@
       <dt>Nickname:</dt>
       <dd>{{ post.nickname }}</dd>
     </fieldset>
-
+    <button>Update Post</button>
   </ng-container>
 </dl>
 
 <button (click)="show = !show">Add New Post</button>
-<button>Update Post</button>
+
 <button>Delete Post</button>
 <!-- <button (click)="show = !show">{{show ? 'hide' : 'show'}}</button>
 show = {{show}} -->
 
-<div *ngIf="show">Text to show</div>
+<div *ngIf="show">Text to show
+  <app-post-form></app-post-form>
+</div>
 <!--
 "name": "Tris",
         "lastName": "Perez",

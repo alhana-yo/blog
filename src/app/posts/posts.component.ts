@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BlogEntry } from '../models/blog-entries.models';
 import { BlogEntriesNormalizerService } from '../services/blog-entries-normalizer.service';
-
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',

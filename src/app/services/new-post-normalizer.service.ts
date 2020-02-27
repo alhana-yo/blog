@@ -21,7 +21,7 @@ export class NewPostNormalizerService {
     };
     console.log('en normalizer', post);
 
-    return post;
+    this.proxy.savePost(post);
   }
 
 

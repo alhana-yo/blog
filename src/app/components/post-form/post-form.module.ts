@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PostFormComponent } from './post-form/post-form.component';
 
 
@@ -7,7 +8,7 @@ import { PostFormComponent } from './post-form/post-form.component';
 @NgModule({
   declarations: [PostFormComponent],
   imports: [
-    CommonModule
+    CommonModule, ReactiveFormsModule
   ],
   exports: [PostFormComponent]
 })

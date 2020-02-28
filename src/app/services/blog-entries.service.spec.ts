@@ -24,7 +24,7 @@ describe("BlogEntriesService", () => {
     const httpMock = TestBed.inject(HttpTestingController);
     service.getPosts().subscribe(posts => expect(posts).toBe(FAKE_POSTS));
     // De esta forma nos estamos protegiendo si alguien modifica esa url
-    const request = httpMock.expectOne("http://localhost:3000/blogEntries");
+    const request = httpMock.expectOne("https://localhost:3443/blogEntries");
     expect(request.request.method).toEqual("GET");
     request.flush(FAKE_POSTS);
     httpMock.verify();

@@ -1,0 +1,27 @@
+<!-- <p>login works!</p> -->
+
+<form [formGroup]="form">
+  <p>Username</p>
+  <input type="text" formControlName="username" />
+
+  <div *ngIf="form.get('username').dirty && !form.get('username').valid">
+    <p *ngIf="form.get('username').hasError('userTaken')">
+      El nombre ya existe
+    </p>
+
+    <p *ngIf="form.get('username').hasError('startWithNumber')">
+      El nombre no puede empezar con un número
+    </p>
+  </div>
+
+  <p>Password</p>
+
+  <input type="password" formControlName="password" />
+  <div *ngIf="form.get('password').dirty && !form.get('password').valid">
+    <p *ngIf="form.get('password').hasError('minlength')">
+      La longitud debe ser mayor que 2
+    </p>
+  </div>
+  <button [disabled]="!form.valid" (click)="onSave()">Send</button>
+</form>
+{{ form.valid }}
